@@ -8,36 +8,58 @@
           <div class="mb-3 row">
             <label class="col-3 col-form-label">Name:</label>
             <div class="col">
-              <input type="text" class="form-control" />
+              <input
+                type="text"
+                class="form-control"
+                v-model.lazy="form.name"
+              />
             </div>
           </div>
           <div class="mb-3 row">
             <label class="col-3 col-form-label">E-mail:</label>
             <div class="col">
-              <input type="email" class="form-control" />
+              <input type="email" class="form-control" v-model="form.email" />
             </div>
           </div>
           <div class="mb-3 row">
             <label class="col-3 col-form-label">Password:</label>
             <div class="col">
-              <input type="password" class="form-control" />
+              <input
+                type="password"
+                class="form-control"
+                v-model.trim="form.password"
+              />
             </div>
           </div>
           <div class="mb-3 row">
             <label class="col-3 col-form-label">Age:</label>
             <div class="col">
-              <input type="number" class="form-control" />
+              <input
+                type="number"
+                class="form-control"
+                v-model.number="form.age"
+              />
             </div>
           </div>
           <div class="mb-3 row">
             <label class="col-3 col-form-label">Gender:</label>
             <div class="col">
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" />
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  value="Female"
+                  v-model="form.gender"
+                />
                 <label class="form-check-label"> Female </label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" />
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  value="Male"
+                  v-model="form.gender"
+                />
                 <label class="form-check-label"> Male </label>
               </div>
             </div>
@@ -47,8 +69,16 @@
             <label class="col-3 col-form-label">License:</label>
             <div class="col">
               <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" />
-                <label class="form-check-label">I read and accept the terms</label>
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  v-model="form.license"
+                  true-value="YES"
+                  false-value="NO"
+                />
+                <label class="form-check-label"
+                  >I read and accept the terms</label
+                >
               </div>
             </div>
           </div>
@@ -57,19 +87,39 @@
             <label class="col-3 col-form-label">Interests:</label>
             <div class="col">
               <div class="form-check">
-                <input class="form-check-input" type="checkbox" />
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  value="JavaScript"
+                  v-model="form.interests"
+                />
                 <label class="form-check-label"> JavaScript </label>
               </div>
               <div class="form-check">
-                <input class="form-check-input" type="checkbox" />
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  value="VueJS"
+                  v-model="form.interests"
+                />
                 <label class="form-check-label"> VueJS </label>
               </div>
               <div class="form-check">
-                <input class="form-check-input" type="checkbox" />
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  value="Angular"
+                  v-model="form.interests"
+                />
                 <label class="form-check-label"> Angular </label>
               </div>
               <div class="form-check">
-                <input class="form-check-input" type="checkbox" />
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  value="NodeJS"
+                  v-model="form.interests"
+                />
                 <label class="form-check-label"> NodeJS </label>
               </div>
             </div>
@@ -149,9 +199,7 @@
           <div class="mb-3 row">
             <div class="col d-flex justify-content-between">
               <button class="btn btn-secondary" type="reset">Clear</button>
-              <button class="btn btn-success" type="button">
-                Send (btn)
-              </button>
+              <button class="btn btn-success" type="button">Send (btn)</button>
               <button class="btn btn-success" type="submit">
                 Send (submit)
               </button>
@@ -164,31 +212,36 @@
         <span class="fs-4">OBJECT STATUS</span>
         <hr />
         <div class="mb-5 row">
-          <spam>Object state</spam>
+          <spam>{{ form }}</spam>
         </div>
 
         <span class="fs-4">DATA OUTPUT</span>
         <hr />
         <div class="mb-3 row">
-          <spam>Name:</spam>
+          <spam>Name: {{ form.name }}</spam>
         </div>
         <div class="mb-3 row">
-          <spam>E-mail:</spam>
+          <spam>E-mail: {{ form.email }}</spam>
         </div>
         <div class="mb-3 row">
-          <spam>Password:</spam>
+          <spam>Password: {{ form.password }}</spam>
         </div>
         <div class="mb-3 row">
-          <spam>Age:</spam>
+          <spam>Age: {{ form.age }}</spam>
         </div>
         <div class="mb-3 row">
-          <spam>Gender:</spam>
+          <spam>Gender: {{ form.gender }}</spam>
         </div>
         <div class="mb-3 row">
-          <spam>Licença:</spam>
+          <spam>Licença: {{ form.license }}</spam>
         </div>
         <div class="mb-3 row">
           <spam>Interests:</spam>
+          <ul>
+            <li v-for="(interest, index) in form.interests" :key="index">
+              {{ interest }}
+            </li>
+          </ul>
         </div>
         <div class="mb-3 row">
           <spam>Phone:</spam>
@@ -228,5 +281,16 @@
 <script>
 export default {
   name: "AppForm",
+  data: () => ({
+    form: {
+      name: "Jonas",
+      email: "jonas@email.com",
+      password: "123456",
+      age: "25",
+      license: "NO",
+      interests: [],
+      gender: "",
+    },
+  }),
 };
 </script>
