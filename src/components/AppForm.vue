@@ -130,9 +130,107 @@
               <input
                 type="tel"
                 class="form-control"
-                pattern="[0-9]{2} [0-9]{5}-[0-9]{4}"
+                v-model="form.phone"
+                v-maska
+                data-maska="(##) #####-####"
               />
-              <small class="text-muted">Format: 11 97777-5555</small>
+              <small class="text-muted">Format: (00) 00000-0000</small>
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label class="col-3 col-form-label">CEP:</label>
+            <div class="col">
+              <input
+                type="tel"
+                class="form-control"
+                v-model="form.cep"
+                v-maska
+                data-maska="#####-###"
+              />
+              <small class="text-muted">Format: 00000-000</small>
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label class="col-3 col-form-label">CPF:</label>
+            <div class="col">
+              <input
+                type="tel"
+                class="form-control"
+                v-model="form.cpf"
+                v-maska
+                data-maska="###.###.###-##"
+              />
+              <small class="text-muted">Format: 000.000.000-00</small>
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label class="col-3 col-form-label">CNPJ:</label>
+            <div class="col">
+              <input
+                type="tel"
+                class="form-control"
+                v-model="form.cnpj"
+                v-maska
+                data-maska="##.###.###/####-##"
+              />
+              <small class="text-muted">Format: 00.000.000/0000-00</small>
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label class="col-3 col-form-label">Credit Card:</label>
+            <div class="col">
+              <input
+                type="tel"
+                class="form-control"
+                v-model="form.creditCard"
+                v-maska
+                data-maska="#### #### #### ####"
+              />
+              <small class="text-muted">Format: 0000 0000 0000 0000</small>
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label class="col-3 col-form-label">License plate:</label>
+            <div class="col">
+              <input
+                type="text"
+                class="form-control"
+                v-model="form.licensePlate"
+                v-maska:[options]
+                data-maska="['AAA-####', 'aaa-####']"
+                data-maska-tokens="A:[A-Z]|a:[a-z]"
+              />
+              <small class="text-muted">Format: AAA-0000</small>
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label class="col-3 col-form-label"
+              >License plate (Mercosul):</label
+            >
+            <div class="col">
+              <input
+                type="text"
+                class="form-control"
+                v-model="form.licensePlateMercosul"
+                v-maska:[options]
+                data-maska="SSS#S##"
+                data-maska-tokens="S:[a-zA-Z]"
+              />
+              <small class="text-muted">Format: AAA0A00</small>
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label class="col-3 col-form-label">RG:</label>
+            <div class="col">
+              <input
+                type="text"
+                class="form-control"
+                v-model="form.rg"
+                v-maska:[options]
+                data-maska="0-X"
+                data-maska-tokens="0:[0-9]:multiple|X:[0-9a-zA-Z]"
+              />
+              <small class="text-muted">Format: without standard (e.g: 1234, 1234-1, 1234-X, 1234567890-1, 1234567890-X)</small>
             </div>
           </div>
           <div class="mb-3 row">
@@ -212,31 +310,31 @@
         <span class="fs-4">OBJECT STATUS</span>
         <hr />
         <div class="mb-5 row">
-          <spam>{{ form }}</spam>
+          <span>{{ form }}</span>
         </div>
 
         <span class="fs-4">DATA OUTPUT</span>
         <hr />
         <div class="mb-3 row">
-          <spam>Name: {{ form.name }}</spam>
+          <span>Name: {{ form.name }}</span>
         </div>
         <div class="mb-3 row">
-          <spam>E-mail: {{ form.email }}</spam>
+          <span>E-mail: {{ form.email }}</span>
         </div>
         <div class="mb-3 row">
-          <spam>Password: {{ form.password }}</spam>
+          <span>Password: {{ form.password }}</span>
         </div>
         <div class="mb-3 row">
-          <spam>Age: {{ form.age }}</spam>
+          <span>Age: {{ form.age }}</span>
         </div>
         <div class="mb-3 row">
-          <spam>Gender: {{ form.gender }}</spam>
+          <span>Gender: {{ form.gender }}</span>
         </div>
         <div class="mb-3 row">
-          <spam>Licença: {{ form.license }}</spam>
+          <span>Licença: {{ form.license }}</span>
         </div>
         <div class="mb-3 row">
-          <spam>Interests:</spam>
+          <span>Interests:</span>
           <ul>
             <li v-for="(interest, index) in form.interests" :key="index">
               {{ interest }}
@@ -244,34 +342,57 @@
           </ul>
         </div>
         <div class="mb-3 row">
-          <spam>Phone:</spam>
+          <span>Phone: {{ form.phone }}</span>
         </div>
         <div class="mb-3 row">
-          <spam>Date:</spam>
+          <span>CEP: {{ form.cep }}</span>
         </div>
         <div class="mb-3 row">
-          <spam>Local Date/timne:</spam>
+          <span>CPF: {{ form.cpf }}</span>
         </div>
         <div class="mb-3 row">
-          <spam>Month:</spam>
+          <span>CNPJ: {{ form.cnpj }}</span>
         </div>
         <div class="mb-3 row">
-          <spam>Week:</spam>
+          <span>Credit Card: {{ form.creditCard }}</span>
         </div>
         <div class="mb-3 row">
-          <spam>Time:</spam>
+          <span>License plate (number): {{ form.licensePlate }}</span>
         </div>
         <div class="mb-3 row">
-          <spam>Color:</spam>
+          <span
+            >License plate (alpha/number): {{ form.licensePlateMercosul }}</span
+          >
         </div>
         <div class="mb-3 row">
-          <spam>Limite value:</spam>
+          <span>RG: {{ form.rg }}</span>
         </div>
         <div class="mb-3 row">
-          <spam>Hidden:</spam>
+          <span>Date:</span>
         </div>
         <div class="mb-3 row">
-          <spam>Upload:</spam>
+          <span>Local Date/timne:</span>
+        </div>
+        <div class="mb-3 row">
+          <span>Month:</span>
+        </div>
+        <div class="mb-3 row">
+          <span>Week:</span>
+        </div>
+        <div class="mb-3 row">
+          <span>Time:</span>
+        </div>
+        <div class="mb-3 row">
+          <span>Color:</span>
+        </div>
+        <div class="mb-3 row">
+          <span>Limite value:</span>
+        </div>
+        <div class="mb-3 row">
+          <span>Hidden:</span>
+        </div>
+        <div class="mb-3 row">
+          <span>Upload:</span>
         </div>
       </div>
     </div>
@@ -279,9 +400,14 @@
 </template>
 
 <script>
+const options = {
+  preProcess: (val) => val.toUpperCase(),
+};
+
 export default {
   name: "AppForm",
   data: () => ({
+    options: options,
     form: {
       name: "Jonas",
       email: "jonas@email.com",
@@ -290,6 +416,14 @@ export default {
       license: "NO",
       interests: [],
       gender: "",
+      phone: "",
+      cep: "",
+      cpf: "",
+      cnpj: "",
+      creditCard: "",
+      licensePlate: "",
+      licensePlateMercosul: "",
+      rg: "",
     },
   }),
 };

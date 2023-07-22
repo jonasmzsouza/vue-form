@@ -1,4 +1,8 @@
-import { createApp } from 'vue'
-import App from './App.vue'
+import { createApp } from "vue";
+import { vMaska } from "maska";
+import App from "./App.vue";
 
-createApp(App).mount('#app')
+const app = createApp(App);
+
+app.directive("maska", vMaska);
+app.mount("#app");
