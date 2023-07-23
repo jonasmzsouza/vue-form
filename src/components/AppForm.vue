@@ -230,37 +230,44 @@
                 data-maska="0-X"
                 data-maska-tokens="0:[0-9]:multiple|X:[0-9a-zA-Z]"
               />
-              <small class="text-muted">Format: without standard (e.g: 1234, 1234-1, 1234-X, 1234567890-1, 1234567890-X)</small>
+              <small class="text-muted"
+                >Format: without standard (e.g: 1234, 1234-1, 1234-X,
+                1234567890-1, 1234567890-X)</small
+              >
             </div>
           </div>
           <div class="mb-3 row">
             <label class="col-3 col-form-label">Date:</label>
             <div class="col">
-              <input type="date" class="form-control" />
+              <input type="date" class="form-control" v-model="form.date" />
             </div>
           </div>
           <div class="mb-3 row">
             <label class="col-3 col-form-label">Local Date/time:</label>
             <div class="col">
-              <input type="datetime-local" class="form-control" />
+              <input
+                type="datetime-local"
+                class="form-control"
+                v-model="form.localDatetime"
+              />
             </div>
           </div>
           <div class="mb-3 row">
             <label class="col-3 col-form-label">Month:</label>
             <div class="col">
-              <input type="month" class="form-control" />
+              <input type="month" class="form-control" v-model="form.month" />
             </div>
           </div>
           <div class="mb-3 row">
             <label class="col-3 col-form-label">Week:</label>
             <div class="col">
-              <input type="week" class="form-control" />
+              <input type="week" class="form-control" v-model="form.week" />
             </div>
           </div>
           <div class="mb-3 row">
             <label class="col-3 col-form-label">Time:</label>
             <div class="col">
-              <input type="time" class="form-control" />
+              <input type="time" class="form-control" v-model="form.time" />
             </div>
           </div>
           <div class="mb-3 row">
@@ -368,19 +375,31 @@
           <span>RG: {{ form.rg }}</span>
         </div>
         <div class="mb-3 row">
-          <span>Date:</span>
+          <span
+            >Date: {{ form.date }} |
+            {{ $moment(form.date).format("DD/MM/YYYY") }}</span
+          >
         </div>
         <div class="mb-3 row">
-          <span>Local Date/timne:</span>
+          <span
+            >Local Date/timne: {{ form.localDatetime }} |
+            {{ $moment(form.localDatetime).format("LLLL") }}</span
+          >
         </div>
         <div class="mb-3 row">
-          <span>Month:</span>
+          <span
+            >Month: {{ form.month }} |
+            {{ $moment(form.month).format("MMMM [de] YYYY") }}</span
+          >
         </div>
         <div class="mb-3 row">
-          <span>Week:</span>
+          <span
+            >Week: {{ form.week }} |
+            {{ $moment(form.week).format(`[Semana] w, YYYY`) }}</span
+          >
         </div>
         <div class="mb-3 row">
-          <span>Time:</span>
+          <span>Time: {{ form.time }} </span>
         </div>
         <div class="mb-3 row">
           <span>Color:</span>
@@ -424,6 +443,11 @@ export default {
       licensePlate: "",
       licensePlateMercosul: "",
       rg: "",
+      date: "",
+      localDatetime: "",
+      month: "",
+      week: "",
+      time: "",
     },
   }),
 };
