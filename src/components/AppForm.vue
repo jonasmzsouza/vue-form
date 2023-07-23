@@ -332,6 +332,19 @@
               </select>
             </div>
           </div>
+          <div class="mb-3 row">
+            <label class="col-3 col-form-label">Rate:</label>
+            <div class="col">
+              <!-- <stars-input
+                :star-numbers="5"
+                @rate="form.rate = $event"
+              ></stars-input> -->
+              <stars-input
+                :star-numbers="5"
+                v-model:rate="form.rate"
+              ></stars-input>
+            </div>
+          </div>
           <hr />
           <div class="mb-3 row">
             <div class="col d-flex justify-content-between">
@@ -354,7 +367,7 @@
             </div>
           </div>
         </div>
-				<!-- </form> -->
+        <!-- </form> -->
       </div>
 
       <div
@@ -472,17 +485,22 @@
         <div class="mb-3 row">
           <span>Course: {{ form.course }}</span>
         </div>
+        <div class="mb-3 row">
+          <span>Rate: {{ form.rate }}</span>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import StarsInput from "@/components/StarsInput.vue";
 const options = {
   preProcess: (val) => val.toUpperCase(),
 };
 
 export default {
+  components: { StarsInput },
   name: "AppForm",
   data: () => ({
     options: options,
@@ -522,6 +540,7 @@ export default {
       files: "",
       description: "",
       course: "",
+      rate: 0,
     },
   }),
   created() {
