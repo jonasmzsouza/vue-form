@@ -273,7 +273,7 @@
           <div class="mb-3 row">
             <label class="col-3 col-form-label">Color:</label>
             <div class="col">
-              <input type="color" class="form-color" />
+              <input type="color" class="form-color" v-model="form.color" />
             </div>
           </div>
           <div class="mb-3 row">
@@ -285,19 +285,50 @@
                 min="0"
                 max="100"
                 step="1"
+                v-model="form.range"
               />
             </div>
           </div>
           <div class="mb-3 row">
             <label class="col-3 col-form-label">Hidden:</label>
             <div class="col">
-              <input type="hidden" class="form-control" />
+              <input type="hidden" class="form-control" v-model="form.hidden" />
             </div>
           </div>
           <div class="mb-3 row">
             <label class="col-3 col-form-label">Upload:</label>
             <div class="col">
-              <input type="file" class="form-control" />
+              <input
+                type="file"
+                class="form-control"
+                multiple
+                @change="selectFiles($event)"
+              />
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label class="col-3 col-form-label">Description:</label>
+            <div class="col">
+              <textarea
+                class="form-control"
+                rows="3"
+                v-model="form.description"
+              ></textarea>
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label class="col-3 col-form-label">Courses:</label>
+            <div class="col">
+              <select class="form-control" v-model="form.course">
+                <option value="" selected disabled>Select a course</option>
+                <option
+                  v-for="course in courses"
+                  :key="course.id"
+                  :value="course.id"
+                >
+                  {{ course.name }}
+                </option>
+              </select>
             </div>
           </div>
           <hr />
@@ -313,7 +344,10 @@
         </form>
       </div>
 
-      <div class="col-12 col-md-6 text-white bg-secondary">
+      <div
+        class="col-12 col-md-6 text-white bg-secondary"
+        :style="'background-color:' + form.color + '!important;'"
+      >
         <span class="fs-4">OBJECT STATUS</span>
         <hr />
         <div class="mb-5 row">
@@ -402,16 +436,28 @@
           <span>Time: {{ form.time }} </span>
         </div>
         <div class="mb-3 row">
-          <span>Color:</span>
+          <span>Color: {{ form.color }}</span>
         </div>
         <div class="mb-3 row">
-          <span>Limite value:</span>
+          <span>Limite value: {{ form.range }}</span>
         </div>
         <div class="mb-3 row">
-          <span>Hidden:</span>
+          <span>Hidden: {{ form.hidden }}</span>
         </div>
         <div class="mb-3 row">
           <span>Upload:</span>
+          <ul>
+            <li v-for="(file, index) in form.files" :key="index">
+              {{ file.name }}
+            </li>
+          </ul>
+        </div>
+        <div class="mb-3 row">
+          <span>Description:</span>
+          <div style="white-space: pre">{{ form.description }}</div>
+        </div>
+        <div class="mb-3 row">
+          <span>Course: {{ form.course }}</span>
         </div>
       </div>
     </div>
@@ -427,6 +473,14 @@ export default {
   name: "AppForm",
   data: () => ({
     options: options,
+    courses: [
+      { id: 1, name: "MySQL DataBase" },
+      { id: 2, name: "Web Development with VueJS" },
+      { id: 3, name: "Web Development with Angular" },
+      { id: 4, name: "Web Development with ReactJS" },
+      { id: 5, name: "Development with Java & SringBoot Framework" },
+      { id: 6, name: "Development with PHP & Laravel Framework" },
+    ],
     form: {
       name: "Jonas",
       email: "jonas@email.com",
@@ -448,7 +502,18 @@ export default {
       month: "",
       week: "",
       time: "",
+      color: "#6c757d",
+      range: 0,
+      hidden: "hidden value",
+      files: "",
+      description: "",
+      course: "",
     },
   }),
+  methods: {
+    selectFiles(event) {
+      this.form.files = event.target.files;
+    },
+  },
 };
 </script>
