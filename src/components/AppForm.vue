@@ -4,7 +4,8 @@
       <div class="col-12 col-md-6 bg-light">
         <span class="fs-4">DATA INPUT</span>
         <hr />
-        <form>
+        <!-- <form @submit.prevent="send($event)" @reset.prevent="clear()"> -->
+        <div>
           <div class="mb-3 row">
             <label class="col-3 col-form-label">Name:</label>
             <div class="col">
@@ -334,14 +335,26 @@
           <hr />
           <div class="mb-3 row">
             <div class="col d-flex justify-content-between">
-              <button class="btn btn-secondary" type="reset">Clear</button>
-              <button class="btn btn-success" type="button">Send (btn)</button>
+              <button class="btn btn-secondary" type="button" @click="clear()">
+                Clear (btn)
+              </button>
+              <button class="btn btn-secondary" type="reset">
+                Clear (reset)
+              </button>
+              <button
+                class="btn btn-success"
+                type="button"
+                @click="send($event)"
+              >
+                Send (btn)
+              </button>
               <button class="btn btn-success" type="submit">
                 Send (submit)
               </button>
             </div>
           </div>
-        </form>
+        </div>
+				<!-- </form> -->
       </div>
 
       <div
@@ -481,7 +494,8 @@ export default {
       { id: 5, name: "Development with Java & SringBoot Framework" },
       { id: 6, name: "Development with PHP & Laravel Framework" },
     ],
-    form: {
+    form: {},
+    formInitialState: {
       name: "Jonas",
       email: "jonas@email.com",
       password: "123456",
@@ -510,9 +524,20 @@ export default {
       course: "",
     },
   }),
+  created() {
+    this.clear();
+  },
   methods: {
     selectFiles(event) {
       this.form.files = event.target.files;
+    },
+    send(e) {
+      const form = Object.assign({}, this.form);
+      console.log(e);
+      console.log(form);
+    },
+    clear() {
+      this.form = Object.assign({}, this.formInitialState);
     },
   },
 };
